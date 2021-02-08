@@ -1,0 +1,7 @@
+pip install Flask==1.1.1
+pip install Flask-MySQLdb
+pip install requests==2.22.0
+pip install textract
+pip install sklearn==0.23.1
+pip install PyPDF2==1.26.0
+pip install gensim==3.8.0

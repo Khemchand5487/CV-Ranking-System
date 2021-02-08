@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | Upload Resume</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+    <header>
+		<h1>CV Ranking System</h1>
+	</header>
+
+	<nav>
+		<a href="{{ url_for('view_job') }}">View Jobs</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('resume') }}">Upload Resume</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('user_result') }}">Result</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('index') }}">Log Out</a>
+    </nav>
+    
+    <main>
+		<section>
+			<div class="limiter">
+				<div class="container-login100">
+					<div style="width: 1200px;" class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+						<span style="color:black;" class="login100-form-title p-b-32">
+							Upload Resume
+                        </span>
+                        <span style="font-size: 25px; color:black;" class="login100-form-title p-b-32">
+							Your Resume:
+                        </span>
+                        {% if res %}
+                        {% for i, x in enumerate(res) %}
+                        <span style="font-size: 25px;" class="login100-form-title p-b-32">
+							{{i+1}}) {{x}}
+                        </span>
+                        {% endfor %}
+                        {% endif %}
+
+						<form action="{{ url_for('resume') }}" method="post" enctype="multipart/form-data">
+                            <p>Custom file:</p>
+                            <input type="file"  id="filename" name="filename", accept=".pdf, .doc, .docx"> <br><br>
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+							{% if messages %}
+							<div class="msg">{{ messages[0][1] }}</div> <br><br>
+							{% endif %}
+							{% endwith %}
+							<div class="container-login100-form-btn">
+								<button type='submit' name="submit" value="submit" class="login100-form-btn">
+									SUBMIT
+								</button> &nbsp;&nbsp;&nbsp;
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+    </main>
+
+</body>
+</html>

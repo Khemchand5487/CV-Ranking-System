@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | Quiz</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+    <header>
+		<h1>CV Ranking System</h1>
+    </header>
+    <nav></nav>
+    <main>
+        <section>
+            <div class="limiter">
+                <div class="container-login100">
+                    <div style="width: 800px;" class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                        {% if quiz_no < 6 %}
+                        <span style=" color: #000000; font-size: 35px;" class="login100-form-title p-b-32">
+                            {% if quiz_no %}
+                            <strong>QUIZ: {{quiz_no}}</strong>
+                            {% endif %}
+                        </span>
+                        {% if questions %}
+                        <form action="{{url_for('quiz', job_id=job_id, quiz_no=quiz_no)}}" method="post">
+                            <ul style="color: black; font-size: 25px;">
+                                {% for i,q in enumerate(questions) %}
+                                    {% for key in q %}
+                                <li><strong>Q{{i+1}}. {{key}}</strong> <br>
+                                    <label class="container">{{q[key][0]}}<input type="radio" name="ques_{{i+1}}" value="{{q[key][0]}}" required>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">{{q[key][1]}}<input type="radio" name="ques_{{i+1}}" value="{{q[key][1]}}" required>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">{{q[key][2]}}<input type="radio" name="ques_{{i+1}}" value="{{q[key][2]}}" required>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">{{q[key][3]}}<input type="radio" name="ques_{{i+1}}" value="{{q[key][3]}}" required>
+                                        <span class="checkmark"></span>
+                                    </label><br><br>
+                                </li>
+                                    {% endfor %}
+                                {% endfor %}                                  
+                            </ul>
+                            <div class="container-login100-form-btn">
+								<button type='submit' name="search" value="search" class="login100-form-btn">
+									SUBMIT
+								</button> &nbsp;&nbsp;&nbsp;
+							</div><br><br>
+                        </form>
+                        {% endif %}
+                        {% else %}
+                        <span style=" color: #000000; font-size: 35px;" class="login100-form-title p-b-32">
+                            <strong>No Quiz Found!</strong> 
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+    </section>
+    </main>
+</body>
+</html>

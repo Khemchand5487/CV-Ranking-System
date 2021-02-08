@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | Upload Resume</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+    <header>
+		<h1>CV Ranking System</h1>
+	</header>
+
+	<nav>
+		<a href="{{ url_for('view_job') }}">View Jobs</a> &nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('resume') }}">Upload Resume</a> &nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('user_result') }}">Result</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('index') }}">Log Out</a>
+    </nav>
+    
+    <main>
+		<section>
+			<div class="limiter">
+				<div class="container-login100">
+                    <div style="width: 1200px;" class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                        {% if mes %}
+						<span style="color:black;" class="login100-form-title p-b-32">
+							{{mes}}!
+                        </span>
+                        {% else %}
+                        <span style="color:black;" class="login100-form-title p-b-32">
+							You are not shortlisted yet!
+                        </span>
+                        {% endif %}
+					</div>
+				</div>
+			</div>
+		</section>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | Quiz Portal</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<header>
+		<h1>CV Ranking System</h1>
+	</header>
+
+	<nav>
+		<a href="{{ url_for('view_job') }}">View Jobs</a> &nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('quiz_portal') }}">Take Quiz</a> &nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('resume') }}">Upload Resume</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('index') }}">Log Out</a>
+	</nav>
+	
+	<main>
+		<section>
+			<div class="limiter">
+				<div class="container-login100">
+					<div style="width: 1200px;" class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+						<span class="login100-form-title p-b-32">
+							Quiz Portal
+						</span>
+						<form action="{{ url_for('quiz_portal') }}" method="post">
+							<span class="txt1 p-b-11">
+								Enter Job Id:
+								<div style="width: 200px;" class="wrap-input100 validate-input m-b-36">
+									<input style="width: 200px;" class="input100" type="number" name="job_id" required>
+									<span style="width: 200px;" class="focus-input100"></span>
+								</div>
+							</span>
+
+							{% with messages = get_flashed_messages(with_categories=true) %}
+							{% if messages %}
+							<div class="msg">{{ messages[0][1] }}</div> <br><br>
+							{% endif %}
+							{% endwith %}
+							<div class="container-login100-form-btn">
+								<button type='submit' name="search" value="search" class="login100-form-btn">
+									SEARCH
+								</button> &nbsp;&nbsp;&nbsp;
+							</div><br><br>
+						</form>
+						{% if ran %}
+						<span style="color: black;" class="login100-form-title p-b-32">
+							Quizzes for given job ID
+						</span>
+						<ol>
+							{% if data %}
+							{% for i, (item, id) in enumerate(data) %}
+							<li><a style="text-decoration: none; font-size: 25px;" class="login100-form-title p-b-32" target="_blank" href="{{ url_for('quiz', quiz_id=id, quiz_title=item) }}">{{i+1}}) {{item}}</a></li>
+							{% endfor %}
+							{% endif %}
+						</ol>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+</body>
+</html>	

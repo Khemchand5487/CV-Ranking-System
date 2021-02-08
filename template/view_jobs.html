@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | View Jobs</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<header>
+		<h1>CV Ranking System </h1>
+	</header>
+
+	<nav>
+		<a href="{{ url_for('view_job') }}">View Jobs</a> &nbsp;&nbsp;&nbsp;
+		<!-- <a href="{{ url_for('quiz_portal') }}">Take Quiz</a> &nbsp;&nbsp;&nbsp; -->
+		<a href="{{ url_for('resume') }}">Upload Resume</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('user_result') }}">Result</a> &nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('index') }}">Log Out</a>
+	</nav>
+
+	<main>
+		<br><h2>All Jobs</h2>
+
+		{% if quiz_no %}
+		{% for jobId, jobTitle, companyName, minSalary, maxSalary, location_, jobDescription, skills_ in zip(job_id, job_title, company_name, min_salary, max_salary, location, job_description, skills) %}
+		<a href="{{ url_for('quiz', job_id=jobId['job_id'], quiz_no=quiz_no) }}" rel="noopener noreferrer">
+			<div class="jp_job_post_main_wrapper_cont" style="width: 720px; margin-left: 410px; margin-top: 50px;">
+				
+				<div class="jp_job_post_main_wrapper">
+					<div class="row">
+						<div style="font-family: Raleway-SemiBold;" class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+							<h4 style="font-family: Raleway-Bold;"><strong>Job ID: {{ jobId['job_id'] }}</strong></h4>
+							<div class="jp_job_post_right_cont" style="margin-left: 30px;">
+								<h4 style="font-family: Raleway-Bold;">{{ jobTitle['job_title'] }}</h4>
+								<p>{{ companyName['company_name'] }}</p>
+								<ul>
+									<li><i class="fa fa-cc-paypal"></i>&nbsp; ${{ minSalary['min_salary'] }}K - ${{ maxSalary['max_salary']}}K P.A.</li>
+									<li><i class="fa fa-map-marker"></i>&nbsp; {{ location_['location'] }}</li>
+								</ul><br><br>
+								<h4 style="font-family: Raleway-SemiBold;">Job Description</h4>
+								<p style="color: black;">{{ jobDescription['job_description'] }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="jp_job_post_keyword_wrapper">
+					<ul>
+						<li><i class="fa fa-tags"></i>Skills Required :</li>
+						<li><a href="#">{{ skills_['skills'] }}</a></li>
+					</ul>
+				</div>
+				
+			</div>
+		</a>
+		{% endfor %}
+		{% endif %}
+	</main>
+</body>
+</html>

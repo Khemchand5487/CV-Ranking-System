@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CV RAnking System | Result</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../static/util.css">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/util_2.css">
+	<link rel="stylesheet" type="text/css" href="../static/main_2.css">
+<!--===============================================================================================-->
+</head>
+<body>
+    <header>
+		<h1>CV Ranking System</h1>
+	</header>
+
+	<nav>
+		<a href="{{ url_for('view_jobs') }}">View Jobs</a> &nbsp;&nbsp;&nbsp;
+		<div class="dropdown">
+			<div class="dropdown-content" style="margin-top: 30px;">
+				<a href="{{ url_for('add_job') }}">Add Job</a>
+				<a href="{{ url_for('update_job') }}">Update Job</a>
+			</div>
+			<button class="dropbtn">Add/Update Jobs
+			  <i class="fa fa-caret-down"></i>
+			</button>
+		</div>&nbsp;&nbsp;&nbsp;
+		<div class="dropdown">
+			<div class="dropdown-content" style="margin-top: 30px;">
+				<a href="{{ url_for('add_quiz') }}">Add Quiz</a>
+				<a href="{{ url_for('update_quiz') }}">Remove Quiz</a>
+			</div>
+			<button class="dropbtn">Add/Remove Quiz
+			  <i class="fa fa-caret-down"></i>
+			</button>
+		</div>&nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('result') }}">View Result</a> &nbsp;&nbsp;&nbsp;
+		<a href="{{ url_for('index') }}">Log Out</a>
+    </nav>
+    <div class="limiter">
+		<div class="container-login100">
+            <div style="width: 1200px;" class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+       	        <form action="{{ url_for('result') }}" method="post">
+					<span style="color:black;" class="login100-form-title p-b-32">
+						View Result
+					</span>
+					<span class="txt1 p-b-11">
+						Enter Job Id:
+						<div style="width: 200px;" class="wrap-input100 validate-input m-b-36">
+							<input style="width: 200px;" class="input100" type="number" name="job_id" required>
+							<span style="width: 200px;" class="focus-input100"></span>
+						</div>
+					</span>
+					{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+					<div class="msg">{{ messages[0][1] }}</div> <br><br>
+					{% endif %}
+					{% endwith %}
+					<div class="container-login100-form-btn">
+						<button type='submit' name="search" value="search" class="login100-form-btn">
+							SCAN
+						</button> &nbsp;&nbsp;&nbsp;
+					</div><br><br>
+				</form>
+				
+			</div>
+        </div>
+        {% if res %}
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table100">
+                        <table>
+                            <thead>
+                                <tr class="table100-head">
+                                    <th class="column1">Rank</th>
+                                    <th class="column2">Resume</th>
+                                    <th class="column3">Quizzes Scores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for i, item in enumerate(zip(res, scores)) %}
+                                    <tr style="color: black;">
+                                        <td class="column1">{{i+1}}</td>
+                                        <td class="column2">{{item[0]}}</td>
+                                        <td class="column3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item[1]}}</td>
+                            
+                                    </tr>
+                                    {% endfor %}
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div> 
+     
+</body>
+</html>
